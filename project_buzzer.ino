@@ -1,5 +1,6 @@
 // Vasilis kotoulas 03/10/2023
-// Δηλωση PIN arduino nano / μεταβλητες
+
+/ Δηλωση PIN arduino nano / μεταβλητες
 
 int led_pwm = 5;       //Pin 5 PWM output
 int sw = 2;            //Pin 2 input digital
@@ -14,32 +15,45 @@ int delay_loop = 200;  // Μεταβλητη για καθυστερηση
 
 void setup() {
 
-  Serial.print(9600);  // επικοινωνια με σειριακη θυρα
+  Serial.begin(9600);  // επικοινωνια με σειριακη θυρα
 
   pinMode(led_pwm, OUTPUT);  // δηλωση Led ως εξοδος
   pinMode(buzzer, OUTPUT);   // δηλωση Buzzer σαν εξοδος
-  pinMode(value_sw, INPUT);  // δηλωση διακοπτη σαν εισοδος ψηφιακη
+  pinMode(sw, INPUT_PULLUP); // δηλωση διακοπτη σαν εισοδος ψηφιακη pin 2 σε κατασταση Pullup
 
 
   //Demo Αρχικη εκκινηση
 
   digitalWrite(led_pwm, HIGH);  // Αναψε το Led
   digitalWrite(buzzer, HIGH);   //βγαλε ηχο στο buzzer
-  delay(200);                   //καθυστερηση για 200 mSec
+  delay(1300);                   //καθυστερηση για 1.3 Sec
   digitalWrite(led_pwm, LOW);   // σβησε Led
-  digitalWrite(buzzer, LOW);    // κοψε ηχο στο buzzer
+  digitalWrite(buzzer, LOW);// κοψε ηχο στο buzzer
+
 }
 
 void loop() {
-  if (value_sw = 1) {
+
+  value_sw = digitalRead(sw);// Διαβασε απο τον Διακοπτη  Sw pin 2
+
+//Αν το value_sw ειναι0 
+
+  if (value_sw == 0) {
+
+    Serial.println(value_sw);
+
     digitalWrite(led_pwm, HIGH);  // Αναψε το Led
-    tone(buzzer, 1000);           // ενεργοποιηση ηχου στο buzzer  1 Khz
+    tone(buzzer, 490);           // ενεργοποιηση ηχου στο buzzer  490 hz
     delay(200);                   // καθυστερηση 200 ms
     digitalWrite(led_pwm, LOW);   // σβησε Led
     delay(delay_loop);            // καθυστερηση 0.2 sec
 
+// αν οχι 
+
   } else {
+
+    Serial.println(value_sw);
     digitalWrite(led_pwm, LOW);  // Σβησε το Led
     noTone(buzzer);              // απενεργοποιησε τον ηχο στο buzzer
   }
-}
+}   
