@@ -1,5 +1,5 @@
-// Vasilis kotoulas 03/10/2023
-
+// Vasilis kotoulas 05/10/2023
+// project youtube https://www.youtube.com/watch?v=tkwhxi_4EX4
 / Δηλωση PIN arduino nano / μεταβλητες
 
 int led_pwm = 5;       //Pin 5 PWM output
